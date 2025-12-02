@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(express.static('public'))
 
 // attatch endpoints
-app.use('/api/v1/pokemon', require('./routes/api/v1/pokemon'))
+app.use('/api/v1/', require('./routes/api/v1/food-truck'))
 app.use(require('./routes/static'))
 
 app.listen(port, () => console.log(`http://localhost:${port}/`))

@@ -5,23 +5,27 @@ const router = require('express').Router()
 
 const root = path.join(__dirname, '..', 'public')
 
-function sendIndex(response) {
-    response.sendFile('index.html', {root})
+function sendIndex(res) {
+    res.sendFile('index.html', {root})
 }
 
-router.get('/', (request, response) => {
-    // response.sendFile('index.html', {root})
-    sendIndex(response)
+// Home page
+router.get('/', (req, res) => {
+    sendIndex(res)
 })
 
-router.get('/pokemon/:id', (request, response) => {
-    // response.sendFile('index.html', {root})
-    sendIndex(response)
+// Event details page
+router.get('/event/:id', (request, response) => {
+    sendIndex(res)
 })
 
-router.get('/type/:type', (request, response) => {
-    //response.sendFile('index.html', {root})
-    sendIndex(response)
+// Menu item details page
+router.get('/menu/:id', (req, res) => {
+    sendIndex(res)
 })
 
+// Admin page
+router.get('/admin', (req, res) => {
+    sendIndex(res)
+})
 module.exports = router

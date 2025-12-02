@@ -1,27 +1,21 @@
 
+(async() => {
+    const h2 = document.querySelector('h2')
+    const h3 = document.querySelector('h3')
 
-const path = require('path')
-const router = require('express').Router()
+    const { pathname } = window.location
+    const [, searchType, id] = pathname.split('/')
+    
+    const url = (() => {
+        if (searchType === 'pokemon') return `/api/v1/pokemon/${id}`
+        if (searchType === 'type') return `/api/v1/pokemon/random/${id}`
+        return '/api/v1/pokemon/random'
+    })()
 
-const root = path.join(__dirname, '..', 'public')
+    const result = await fetch(url)
+    const { name, type } = await result.json()
 
-function sendIndex(response) {
-    response.sendFile('index.html', {root})
-}
+    h2.textContent = name
+    h3.textContent = type
 
-router.get('/', (request, response) => {
-    // response.sendFile('index.html', {root})
-    sendIndex(response)
-})
-
-router.get('/pokemon/:id', (request, response) => {
-    // response.sendFile('index.html', {root})
-    sendIndex(response)
-})
-
-router.get('/type/:type', (request, response) => {
-    //response.sendFile('index.html', {root})
-    sendIndex(response)
-})
-
-module.exports = router
+})()
