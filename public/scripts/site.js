@@ -1,76 +1,58 @@
 
 (async() => {
-    const h2 = document.querySelector('h2')
-    const h3 = document.querySelector('h3')
-
-    const { pathname } = window.location
-    const [, searchType, id] = pathname.split('/')
     
-    const url = (() => {
-        if (searchType === 'pokemon') return `/api/v1/pokemon/${id}`
-        if (searchType === 'type') return `/api/v1/pokemon/random/${id}`
-        return '/api/v1/pokemon/random'
-    })()
+    const { pathname } = window.location
+    
+    if (pathname === '/' || pathname !== '') return
 
-    const result = await fetch(url)
-    const { name, type } = await result.json()
+    const menuBox = document.querySelector('#menuItems')
+    const eventBox = document.querySelector('#eventItems')
+    
+    if (!menuBox || !eventBox) return
 
-    h2.textContent = name
-    h3.textContent = type
+    // fetch data from API
+    const [menuRes, eventRes] = await Promise.all([
+        fetch('/api/v1/food-truck/menu'),
+        fetch('/api/v1/food-truck/events')
+    ])
 
+    const menuData = await menuRes.json()
+    const eventData = await eventRes.json()
+
+    // render menu
+    menuBox.innerHTML = ''
+    menuData.forEach((item) => {
+        const wrapper = document.createElement('article')
+        wrapper.className = 'menuItems'
+
+        const title = document.createElement('h3')
+        title.textContent = item.name
+
+        const desc = document.createElement('p')
+        desc.textContent = item.description
+
+        const price = document.createElement('p')
+        price.textContent = `Price: $${item.price}`
+
+        const img = document.createElement('img')
+        img.src = item.url
+        img.alt = item.name
+        img.width = 300
+
+        wrapper.append(title, desc, price, img)
+        menuBox.appendChild(wrapper)
+    })
+
+    // render events (name + date) w/ link to /event/:id
+    eventBox.innerHTML = ''
+    eventData.forEach((item) => {
+        const wrapper = document.createElement('article')
+        wrapper.className = 'eventItems'
+
+        const link = document.createElement('a')
+        link.href = `/event/${item._id}`
+        link.textContent = `${item.name} - ${item.date}`
+        wrapper.appendChild(link)
+        eventBox.appendChild(wrapper)
+    })
 })()
-
-
-
-
-
-
-// (async () => {
-
-//     // add menu items to the webpage
-
-//     const menu = document.getElementById("menu-items");
-
-//     try {
-//         const response = await fetch('/api/v1/food-truck/menu');
-//         const menuItems = await response.json();
-
-//         menuItems.forEach(item => {
-//             const menuItemsDiv = document.createElement('div');
-//             menuItemsDiv.innerHTML = `
-//                 <h3>${item.name}</h3>
-//                 <p>${item.description}</p>
-//                 <p>Price: $${item.price}</p>
-//                 <img src="${item.url}" alt="${item.name}" width="300" />
-//             `;
-//             menu.appendChild(menuItemsDiv);
-//         });
-//     } catch (error) {
-//         console.error('Error fetching menu items:', error);
-//     }
-
-//     // add events to the webpage
-
-//     const events = document.getElementById("event-list");
-
-//     try {
-//         const response = await fetch('/api/v1/food-truck/events');
-//         const eventsList = await response.json();
-
-//         eventsList.forEach(item => {    
-
-//             const eventsDiv = document.createElement('div');
-//             eventsDiv.innerHTML = `
-//                 <h3><a href="/event/${item._id}">${item.name}</a></h3>
-//                 <p>${item.location}</p>
-//                 <p>${item.date}</p>
-//                 <p>${item.time}</p>
-//             `;
-//             events.appendChild(eventsDiv);
-//         });
-//     } catch (error) {
-//         console.error('Error fetching events:', error);
-//     }
-
-
-// })();
