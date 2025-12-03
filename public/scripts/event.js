@@ -1,9 +1,9 @@
-(async () => {
+;(async () => {
     const { pathname } = window.location
     const parts = pathname.split('/')
     const [, searchType, id ] = parts
 
-    if (searchType !== 'event' || !id) return
+    //if (searchType !== 'event' || !id) return
 
     const res = await fetch(`/api/v1/food-truck/events/${id}`)
     const { name, location, date, time } = await res.json()

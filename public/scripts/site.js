@@ -1,9 +1,9 @@
 
-(async() => {
+;(async() => {
     
     const { pathname } = window.location
     
-    if (pathname === '/' || pathname !== '') return
+    //if (pathname === '/' || pathname !== '') return
 
     const menuBox = document.querySelector('#menuItems')
     const eventBox = document.querySelector('#eventItems')
