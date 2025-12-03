@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/site.css">
+    <script src="/scripts/admin.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Food Truck</h1>
+    </header>
+    <main>
+        <section>
+            <form id="addItem">
+                <h2>Add Menu Item</h2>
+                <input type="text" id="menuName" placeholder="name" />
+                <input type="text" id="menuDescription" placeholder="description" />
+                <input type="text" id="menu-Price" placeholder="price" />
+                <input type="text" id="menuUrl" placeholder="image url" />
+                <button type="submit">Add Menu Item</button>
+            </form>
+            <h3 id="menuAdded"></h3>
+        </section>
+
+        <section>
+            <form id="addEvent">
+                <h2>Add Event</h2>
+                <input type="text" id="eventName" placeholder="name" />
+                <input type="text" id="eventLocation" placeholder="location" />
+                <input type="text" id="eventDate" placeholder="date" />
+                <input type="text" id="eventTime" placeholder="time" />
+                <button type="submit">Add Event</button>
+            </form>
+        </section>
+
+        <form action="/">
+            <input type="submit" value="Return to Homepage" />
+        </form>
+    </main>
+</body>
+</html>

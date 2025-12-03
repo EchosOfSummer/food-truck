@@ -5,30 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FOOD TRUCK</title>
-    <link rel="stylesheet" href="/public/styles/site.css">
-    <script src="/public/scripts/site.js" defer></script>
+    <link rel="stylesheet" href="/style/site.css">
+    <script src="/scripts/event.js" defer></script>
 </head>
 <body>
     <header>
         <h1>FOOD TRUCK</h1>
     </header>
     <main>
-        <div id="menu">
-            <h2>Menu</h2>
-            <div id="menu-items"></div>
-        </div>
-
-        <div id="events">
-            <h2>Events</h2>
-            <div id="event-items"></div>
-        </div>
-
-        <div id="create">
-            <h2>Create</h2>
-            <form action="/admin">
-                <button type="submit" value="admin">Go create something.</button>
-            </form>
-        </div>
+        <section id="details">
+            <h2>Event Details</h2>
+            <!--display event details-->
+            <div id="event"></div>
+            <h3 id="eventName"></h3>
+            <h4 id="eventLocation"></h2>
+            <h4 id="eventDate"></h2>
+            <h4 id="eventTime"></h2>
+        </section>
     </main>
 </body>
 </html>
