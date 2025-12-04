@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 })
 
 // Event details page
-router.get('/event/:id', (request, response) => {
+router.get('/event/:id', (req, res) => {
     res.sendFile('event.html', {root})
 })
 

@@ -5,7 +5,7 @@
 
     //if (searchType !== 'event' || !id) return
 
-    const res = await fetch(`/api/v1/food-truck/events/${id}`)
+    const res = await fetch(`/api/v1/events/${id}`)
     const { name, location, date, time } = await res.json()
 
     const nameEl = document.querySelector('#eventName')

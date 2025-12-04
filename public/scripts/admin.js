@@ -52,7 +52,7 @@
             const res = await fetch('/api/v1/events',{
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(addEvent)
+                body: JSON.stringify(newEvent)
             })
 
             const json = await res.json()

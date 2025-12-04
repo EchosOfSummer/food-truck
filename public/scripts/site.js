@@ -12,8 +12,8 @@
 
     // fetch data from API
     const [menuRes, eventRes] = await Promise.all([
-        fetch('/api/v1/food-truck/menu'),
-        fetch('/api/v1/food-truck/events')
+        fetch('/api/v1/menu'),
+        fetch('/api/v1/events')
     ])
 
     const menuData = await menuRes.json()
