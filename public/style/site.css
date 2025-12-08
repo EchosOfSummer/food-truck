@@ -313,7 +313,7 @@ header h1 {
     }
 }
 
-#menu h2, #events, #create, #details{
+#menu h2, #events h2, #create h2, #details h2{
     font-size: 2.5em;
     font-weight: bold;
     text-transform: uppercase;
@@ -329,4 +329,73 @@ header h1 {
         2px 2px 0 #000,
         3px 3px 0 #000;
     animation: neon-flicker 1.5s infinite alternate;
+}
+
+/* style for menu descriptions and prices */
+.menuItems p {
+    text-align: center;
+    color: #e0e0ff;
+    text-shadow:
+        0 0 3px rgba(0, 242, 255, 0.4),
+        0 0 5px rgba(0, 242, 255, 0.2);
+    font-size: 1.1em;
+    margin: 8px 0;
+}
+
+/* style for event links */
+.eventItems a {
+    text-align: center;
+    color: #c080ff;
+    text-shadow:
+        0 0 3px rgba(192, 128, 255, 0.4),
+        0 0 5px rgba(192, 128, 255, 0.3);
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.eventItems a:hover {
+    text-align: center;
+    color: #b0b0ff;
+    font-size: 1.3em;
+    text-shadow:
+        0 0 5px rgba(224, 160, 255, 0.6),
+        0 0 10px rgba(224, 160, 255, 0.4);
+}
+
+/* event detail page text */
+#details p { 
+    text-align: center;
+    color: #b0b0ff;
+    font-size: 1.3em;
+    text-shadow:
+        0 0 3px rgba(176, 176, 255, 0.3);
+    margin: 15px 0;
+}
+/* add something button */
+#create a { 
+    color: #fff;
+    text-shadow: 
+        0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+/* style for event links */
+.eventItems a {
+    text-align: center;
+    color: #c080ff;
+    text-shadow:
+        0 0 3px rgba(192, 128, 255, 0.4),
+        0 0 5px rgba(192, 128, 155, 0.3);
+    font-size: 1.5em;
+    text-decoration: underline;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 10px 0;
+}
+
+.eventItems a:hover {
+    color: #e0a0ff;
+    text-shadow:
+        0 0 5px rgba(224, 160, 255, 0.6),
+        0 0 10px rgba(224, 160, 255, 0.4);
+    transform: scale(2.05);
 }
