@@ -50,7 +50,7 @@
         wrapper.className = 'eventItems'
 
         const link = document.createElement('a')
-        link.href = `/event/${item._id}`
+        link.href = `/event.html?id=${item._id}`
         link.textContent = `${item.name} - ${item.date}`
         wrapper.appendChild(link)
         eventBox.appendChild(wrapper)
