@@ -3,12 +3,12 @@
 
     if (!eventBox) return;
 
-    const eventRes = await fetch('/api/events');
+    const eventRes = await fetch('/api/v1/events');
     const eventData = await eventRes.json();
 
     // render events
     eventBox.innerHTML = '';
-    eventDate.ForEach((item) => {
+    eventData.forEach((item) => {
         const wrapper = document.createElement('article')
         wrapper.className = 'eventItems'
 
