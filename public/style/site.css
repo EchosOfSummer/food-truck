@@ -21,10 +21,8 @@ h2 {
 
 #wrapper {
     width: 1000px;
-    margin: 15px;
+    margin: 15px auto;
     padding: 0px;
-    margin-left: auto;
-    margin-right: auto;
     color: darkblue;
     background-color: aliceblue;
     border: 1px solid black;
@@ -32,18 +30,40 @@ h2 {
 }
 
 #menu, #events, #create, #details{
-    /* //margin: 20px; */
+    margin: 20px;
     padding: 20px;
-    background-color: floralwhite;
+    background-color: rgb(242, 255, 240);
     border-radius: 5px;
     /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
 }
 
-#content {
+/* #content {
     margin: 0px;
     margin-left: auto;
     margin-right: auto;
+} */
+
+#menu h2, #events h2, #create h2, #details h2{
+    text-align: center;
+    font-weight: Bold;
 }
+
+#menuItems{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 2fr));
+    /* justify-content: center; */
+    gap: 40px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.menuItems{
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 0;
+}
+
 
 body {
     font-family: Arial, sans-serif;
@@ -94,8 +114,8 @@ nav a:hover {
 section {
     padding: 20px;
 	min-height: 50vh;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
     text-align: center;
 }
 
@@ -106,12 +126,12 @@ img {
 }
 p{
     width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
     text-align: justify;
 }
 
-ul {
+/* ul {
     list-style-type: none;
     margin: 0.5rem;
     padding: 0.5rem;
@@ -119,7 +139,7 @@ ul {
 li {
     padding: 0.25rem;
     margin: 0.25rem;
-}
+} */
 footer {
     background-color: #333;
     color: #fff;
@@ -151,14 +171,14 @@ footer > p{
 }
 
 
-
+/* 
 #buttons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     margin-top: 10px;
-}
+} */
 
 
 
