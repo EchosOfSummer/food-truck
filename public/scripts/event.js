@@ -1,21 +1,41 @@
 ;(async () => {
-    const { pathname } = window.location
-    const parts = pathname.split('/')
-    const [, searchType, id ] = parts
+    const urlParams = new URLSearchParams(window.location.search)
+    const eventId = urlParams.get('id')
 
-    //if (searchType !== 'event' || !id) return
+    if (!eventId) {
+        document.querySelector('#event').innerHTML = '<p>No event selected.</p>'
+        return
+    }
 
-    const res = await fetch(`/api/v1/events/${id}`)
-    const { name, location, date, time } = await res.json()
+    const res = await fetch(`/api/events/${eventId}`)
+    const eventData = await res.json()
 
-    const nameEl = document.querySelector('#eventName')
-    const locationEl = document.querySelector('#eventLocation')
-    const dateEl = document.querySelector('#eventDate')
-    const timeEl = document.querySelector('#eventTime')
+    if (eventData.error) {
+        document.querySelector('#event').innerHTML = `<p>${eventData.error.message}</p>`
+    }
 
-    if (nameEl) nameEl.textContent = name
-    if (locationEl) locationEl.textContent = `Location: ${location || ''}` 
-    if (dateEl) dateEl.textContent = `Date: ${date || ''}`
-    if (timeEl) timeEl.textContent = `Time: ${time || ''}`
+    document.querySelector('#eventName').textContent = eventData.name
+    document.querySelector('#eventLocation').textContent = `Location: ${eventData.location}`
+    document.querySelector('#eventName').textContent = `Date: ${eventData.date}`
+    document.querySelector('#eventName').textContent = `Time: ${eventData.time}`
+
+    // const { pathname } = window.location
+    // const parts = pathname.split('/')
+    // const [, searchType, id ] = parts
+
+    // //if (searchType !== 'event' || !id) return
+
+    // const res = await fetch(`/api/v1/events/${id}`)
+    // const { name, location, date, time } = await res.json()
+
+    // const nameEl = document.querySelector('#eventName')
+    // const locationEl = document.querySelector('#eventLocation')
+    // const dateEl = document.querySelector('#eventDate')
+    // const timeEl = document.querySelector('#eventTime')
+
+    // if (nameEl) nameEl.textContent = name
+    // if (locationEl) locationEl.textContent = `Location: ${location || ''}` 
+    // if (dateEl) dateEl.textContent = `Date: ${date || ''}`
+    // if (timeEl) timeEl.textContent = `Time: ${time || ''}`
 })()
 

@@ -71,14 +71,13 @@ h2 {
     gap: 10px
 }
 
-. eventItems{
-    text-align: center;
-}
-.eventItems a {
-    display: inline-block;
+.eventItems{
     text-align: center;
 }
 
+#create {
+    text-align: center;
+}
 body {
     font-family: Arial, sans-serif;
     /* margin: 0px;
