@@ -1,13 +1,16 @@
 ;(async () => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const eventId = urlParams.get('id')
+    // const urlParams = new URLSearchParams(window.location.search)
+    // const eventId = urlParams.get('id')
 
-    if (!eventId) {
+    const path = window.location.pathname.split('/')
+    const eventId = path[path.length - 1]
+
+    if (!eventId || eventId === 'event.html') {
         document.querySelector('#event').innerHTML = '<p>No event selected.</p>'
         return
     }
 
-    const res = await fetch(`/api/events/${eventId}`)
+    const res = await fetch(`/api/v1/events/${eventId}`)
     const eventData = await res.json()
 
     if (eventData.error) {
