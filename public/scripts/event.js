@@ -1,9 +1,9 @@
 ;(async () => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const eventId = urlParams.get('id')
+    // const urlParams = new URLSearchParams(window.location.search)
+    // const eventId = urlParams.get('id')
 
-    // const path = window.location.pathname.split('/')
-    // const eventId = path[path.length - 1]
+    const path = window.location.pathname.split('/')
+    const eventId = path[path.length - 1]
 
     if (!eventId) {
         document.querySelector('#event').innerHTML = '<p>No event selected.</p>'
