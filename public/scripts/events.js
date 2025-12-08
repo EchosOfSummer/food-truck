@@ -33,15 +33,15 @@
         '/img/random10.jpeg',
     ]
 
-    // shuffle array
-    function shuffle(array) {
-        const newArray = [...array]
-        for (let i = newArray.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-        }
-        return newArray
-    }
+    // // shuffle array
+    // function shuffle(array) {
+    //     const newArray = [...array]
+    //     for (let i = newArray.length - 1; i > 0; i--) {
+    //         const j = Math.floor(Math.random() * (i + 1));
+    //         [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    //     }
+    //     return newArray
+    // }
 
     // render events
     eventBox.innerHTML = ''
@@ -61,18 +61,25 @@
         carousel.className = 'carousel'
         carousel.id = `carousel-${index}`
 
-        const shuffledImgs = shuffle(randomImgs)
-        const selectedImgs = shuffledImgs.slice(0, 3)
+        // const shuffledImgs = shuffle(randomImgs)
+        // const selectedImgs = shuffledImgs.slice(0, 3)
 
-        selectedImgs.forEach((imgSrc, index) => {
+        // selectedImgs.forEach((imgSrc, index) => {
+        //     const img = document.createElement('img')
+        //     img.src = imgSrc
+        //     img.alt = `${item.name} image ${index + 1}`
+        //     if (index === 0) img.classList.add('prev')
+        //     if (index === 1) img.classList.add('active')
+        //     if (index === 2) img.classList.add('next')
+        //     carousel.appendChild(img)
+        // })
+        // create images elements
+        for (let i = 0; i<3; i++) {
             const img = document.createElement('img')
-            img.src = imgSrc
-            img.alt = `${item.name} image ${index + 1}`
-            if (index === 0) img.classList.add('prev')
-            if (index === 1) img.classList.add('active')
-            if (index === 2) img.classList.add('next')
+            
+            img.alt = `Event image ${i + 1}`
             carousel.appendChild(img)
-        })
+        }
 
         // create buttons
         const btnDiv = document.createElement('div')
@@ -97,30 +104,67 @@
         eventBox.appendChild(wrapper)
 
         // carousel functionality
-        let currentImg = 1
         const images = carousel.querySelectorAll('img')
+        let currentImg = 0
+        let autoRotate
 
         function updateCarousel() {
             images.forEach((img, index) => {
                 img.classList.remove('prev', 'active', 'next')
+                img.src = randomImgs[Math.floor(Math.random() * randomImgs.length)]
 
-                if (index === (currentImg)) {
+                if (index === 0) img.classList.add('prev')
+                if (index === 1) img.classList.add('active')
+                if ( index === 2) img.classList.add('next')
+                
+
+                // if (index === (currentImg)) {
+                //     img.classList.add('active')
+                // }else if (index === (currentImg - 1 + images.length) % images.length) {
+                //     img.classList.add('prev')
+                // }else if ( index === (currentImg + 1) % images.length) {
+                //     img.classList.add('next')
+                // }
+            })
+        }
+
+        function rotate() {
+            currentImg = (currentImg + 1) % images.length
+            images.forEach((img, index) => {
+                img.classList.remove('prev', 'active', 'next')
+
+                const position = (index - currentImg + images.length) % images.length
+
+                if (position === 0) {
                     img.classList.add('active')
-                }else if (index === (currentImg - 1 + images.length) % images.length) {
+                }else if (position === images.length -1) {
                     img.classList.add('prev')
-                }else if ( index === (currentImg + 1) % images.length) {
+                }else {
                     img.classList.add('next')
                 }
             })
         }
+        function startAuto() {
+            autoRotate = setInterval(rotate, 3000)
+        }
+        function stopAuto() {
+            clearInterval(autoRotate)
+        }
+
+        updateCarousel()
+        startAuto()
 
         prevBtn.addEventListener('click', () => {
+            stopAuto()
             currentImg = (currentImg - 1 + images.length) % images.length
-            updateCarousel()
+            rotate()
+            startAuto()
         })
         nextBtn.addEventListener('click', () => {
+            stopAuto()
             currentImg = (currentImg + 1) % images.length
-            updateCarousel()
+            rotate()
+            startAuto()
         })
     })
 })();
