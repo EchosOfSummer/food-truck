@@ -1,11 +1,11 @@
 ;(async () => {
-    // const urlParams = new URLSearchParams(window.location.search)
-    // const eventId = urlParams.get('id')
+    const urlParams = new URLSearchParams(window.location.search)
+    const eventId = urlParams.get('id')
 
-    const path = window.location.pathname.split('/')
-    const eventId = path[path.length - 1]
+    // const path = window.location.pathname.split('/')
+    // const eventId = path[path.length - 1]
 
-    if (!eventId || eventId === 'event.html') {
+    if (!eventId) {
         document.querySelector('#event').innerHTML = '<p>No event selected.</p>'
         return
     }
@@ -19,8 +19,8 @@
 
     document.querySelector('#eventName').textContent = eventData.name
     document.querySelector('#eventLocation').textContent = `Location: ${eventData.location}`
-    document.querySelector('#eventName').textContent = `Date: ${eventData.date}`
-    document.querySelector('#eventName').textContent = `Time: ${eventData.time}`
+    document.querySelector('#eventDate').textContent = `Date: ${eventData.date}`
+    document.querySelector('#eventTime').textContent = `Time: ${eventData.time}`
 
     // const { pathname } = window.location
     // const parts = pathname.split('/')
