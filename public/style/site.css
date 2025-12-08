@@ -32,9 +32,9 @@ h2 {
 #menu, #events, #create, #details{
     margin: 20px;
     padding: 20px;
-    background-color: rgb(242, 255, 240);
-    border-radius: 5px;
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    background-color: #666666;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(50, 50, 50, 0.1);
 }
 
 /* #content {
@@ -50,7 +50,7 @@ h2 {
 
 #menuItems{
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 2fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     /* justify-content: center; */
     gap: 40px 60px;
     max-width: 900px;
@@ -64,6 +64,20 @@ h2 {
     min-width: 0;
 }
 
+#eventItems{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px
+}
+
+. eventItems{
+    text-align: center;
+}
+.eventItems a {
+    display: inline-block;
+    text-align: center;
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -125,9 +139,9 @@ img {
     
 }
 p{
-    width: 700px;
-    /* margin-left: auto;
-    margin-right: auto; */
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: justify;
 }
 
@@ -146,7 +160,7 @@ footer {
     padding: 10px;
     
     text-align: center;
-	min-height: 10vh;
+	/* min-height: 10vh; */
     border-bottom-left-radius: 0.2485rem;
     border-bottom-right-radius: 0.2485rem;
 }
