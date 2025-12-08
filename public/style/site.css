@@ -1,57 +1,36 @@
-/* 
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: lightskyblue;
-    color: darkslateblue;
-}
 
-header {
-    background-color: darkslateblue;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-h2 {
-    color: darkslateblue;
-}
-
- */
 
 #wrapper {
     width: 1000px;
     margin: 15px auto;
     padding: 0px;
     color: darkblue;
-    background-color: aliceblue;
-    border: 1px solid black;
-    border-radius: 0.375rem;
+    background-color: green;
+    border: 2px solid black;
+    border-radius: 1.375rem;
 }
 
-#menu, #events, #create, #details{
+#menu, #events, #add, #details{
     margin: 20px;
     padding: 20px;
     background-color: #666666;
-    border-radius: 15px;
+    border: 2px solid black;
+    border-radius: 150px;
     box-shadow: 0 2px 5px rgba(50, 50, 50, 0.1);
 }
 
-/* #content {
-    margin: 0px;
-    margin-left: auto;
-    margin-right: auto;
-} */
 
-#menu h2, #events h2, #create h2, #details h2{
+#menu h2, #events h2, #add h2, #details h2{
     text-align: center;
     font-weight: Bold;
+
 }
 
 #menuItems{
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    /* justify-content: center; */
+    justify-content: center;
     gap: 40px 60px;
     max-width: 900px;
     margin: 0 auto;
@@ -84,7 +63,7 @@ body {
     margin-left: auto;
     margin-right: auto; */
     padding: 0px;
-    background-color: rgb(0, 8, 255);
+    background-color: black;
 }
 
 header {
@@ -93,48 +72,56 @@ header {
     margin: 20px;
     text-align: center;
     border: 2px solid black;
-    border-radius: 15px;
+    border-radius: 150px;
 }
 
 nav {
     background-color: #666;
     color: #fff;
     margin: 20px;
-    padding: 10px;
+    padding: 12px 30px;
     text-align: center;
-    border-radius: 15px;
-    border-top-left-radius: 0.2485rem;
-    border-top-right-radius: 0.2485rem;
+    border: 2px solid black;
+    border-radius: 150px;
 }
 
 nav a {
-    color: #ff0000;
+    color: #00f2ff;
 	font-size: 1.1em;
     text-decoration: none;
-    padding: 10px;
+    padding: 5px 15px;
     margin: 0 10px;
     transition: color 0.3s ease;
-	padding: 10px;
+    border: 2px solid rgba(0, 242, 255, 0.5);
+    border-radius: 1.375rem;
+    background-color: rgba(0, 242, 255, 0.1);
+    box-shadow:
+        0 0 10px rgba(0, 242, 255, 0.3),
+        inset 0 0 10px rgba(0, 242, 255, 0.1);
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
 nav a:hover {
-	background: #ee00ff;
-    border-color: #000000;
-    border: 1px solid #fff;
-    border-radius: 0.375rem;
-    color: black;
+	background: rgba(0, 242, 255, 0.3);
+    box-shadow:
+        0 0 20px rgba(0, 242, 255, 0.6),
+        inset 0 0 10px rgba(0, 242, 255, 0.2);
+    color: #fff;
+    transform: scale(1.5);
 }
 
 section {
     padding: 20px;
     /* margin-left: auto;
     margin-right: auto; */
+    
     text-align: center;
 }
 
 img {
-    border: 3px solid black;
-    border-radius: 0.375rem;
+    border: 2px solid black;
+    border-radius: 1.375rem;
     
 }
 p{
@@ -156,30 +143,51 @@ form input[type="text"] {
     width: 25%;
     padding: 10px 20px;
     border: 2px solid #ccc;
-    border-radius: 15px;
+    border-radius: 1.375em;
     box-sizing: border-box;
     font-size: 16px;
 }
 
 form button {
-    padding: 10px 20px;
+    /* padding: 10px 20px;
     background-color: #333;
     color: white;
     border-radius: 15px;
     cursor: pointer;
+    
+    font-size: 24px; */
+    color: #00f2ff;
+    padding: 10px 20px;
+	font-size: 1.6em;
+    margin: 6px;
     width: 25%;
-    font-size: 24px;
+    transition: color 0.3s ease;
+    border: 2px solid rgba(0, 242, 255, 0.5);
+    border-radius: 1.375rem;
+    background-color: rgba(0, 242, 255, 0.1);
+    box-shadow:
+        0 0 10px rgba(0, 242, 255, 0.3),
+        inset 0 0 10px rgba(0, 242, 255, 0.1);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+form button:hover {
+    background: rgba(0, 242, 255, 0.3);
+    box-shadow:
+        0 0 20px rgba(0, 242, 255, 0.6),
+        inset 0 0 10px rgba(0, 242, 255, 0.2);
+    color: #fff;
+    transform: scale(1.2);
 }
 
 footer {
     background-color: #333;
-    color: #fff;
     padding: 10px;
     margin: 20px;
     text-align: center;
 	/* min-height: 10vh; */
     border: 2px solid black;
-    border-radius: 15px;
+    border-radius: 150px;
     /* border-bottom-left-radius: 0.2485rem;
     border-bottom-right-radius: 0.2485rem; */
 }
@@ -188,7 +196,7 @@ footer p{
 }
 
 footer a {
-	color: #fff;
+	color: #00f2ff;
 	text-decoration: none;
 	transition: color 0.3s ease;
 	padding: 10px;
@@ -196,11 +204,16 @@ footer a {
 }
 
 footer a:hover {
-	color: #61bb8e;
-	background-color: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 242, 255, 0.3);
+    box-shadow:
+        0 0 20px rgba(0, 242, 255, 0.6),
+        inset 0 0 10px rgba(0, 242, 255, 0.2);
+    color: #fff;
+    transform: scale(1.5);
 }
 footer > p{
     font-size: .7rem;
+    color: #00f2ff;
 }
 
 
@@ -263,7 +276,7 @@ header h1 {
     }
 }
 
-#menu h2, #events h2, #create h2, #details h2 {
+#menu h2, #events h2, #add h2, #details h2 {
     font-size: 2.5em;
     font-weight: bold;
     text-transform: uppercase;
@@ -278,7 +291,7 @@ header h1 {
     transition: all 0.3s ease;
 }
 
-#menu h2:hover, #events h2:hover, #create h2:hover, #details h2:hover {
+#menu h2:hover, #events h2:hover, #add h2:hover, #details h2:hover {
     transform: perspective(500px) rotateX(0deg) scale(1.1);
     text-shadow: 
         2px 2px 0 #000,
@@ -316,7 +329,7 @@ header h1 {
     }
 }
 
-#menu h2, #events h2, #create h2, #details h2{
+#menu h2, #events h2, #add h2, #details h2{
     font-size: 2.5em;
     font-weight: bold;
     text-transform: uppercase;
@@ -375,7 +388,7 @@ header h1 {
     margin: 15px 0;
 }
 /* add something button */
-#create a { 
+#add a { 
     color: #fff;
     text-shadow: 
         0 0 3px rgba(255, 255, 255, 0.5);
