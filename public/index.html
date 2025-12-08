@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,27 +8,38 @@
     <link rel="stylesheet" href="/style/site.css">
     <script src="/scripts/site.js" defer></script>
 </head>
-<body>
-    <header>
-        <h1>FOOD TRUCK</h1>
-    </header>
-    <main>
-        <div id="menu">
-            <h2>Menu</h2>
-            <div id="menuItems"></div>
-        </div>
 
-        <div id="events">
-            <h2>Events</h2>
-            <div id="eventItems"></div>
-        </div>
+<body id="pageTop">
+    <div id="wrapper">
+        <header>
+            <h1>FOOD TRUCK</h1>
+        </header>
+        <main>
+            <div id="menu">
+                <h2>Menu</h2>
+                <div id="menuItems"></div>
+            </div>
 
-        <div id="create">
-            <h2>Create</h2>
-            <form action="/admin">
-                <button type="submit" value="admin">Go create something.</button>
-            </form>
-        </div>
-    </main>
+            <div id="events">
+                <h2>Events</h2>
+                <div id="eventItems"></div>
+            </div>
+
+            <div id="create">
+                <h2>Create</h2>
+                <form action="/admin">
+                    <button type="submit" value="admin">Go create something.</button>
+                </form>
+            </div>
+        </main>
+        <footer>
+            <div>
+                <p><a href="#pageTop">Back to Top</a></p>
+            </div>
+            <p><span>&copy;</span> 2025 Food-Truck. All rights reserved.</p>
+        </footer>
+    </div>
+
 </body>
+
 </html>
