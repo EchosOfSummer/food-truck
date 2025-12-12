@@ -1,0 +1,38 @@
+### variables
+@url = http://localhost:3000/api/v1
+@idM = 692e2fdc9a1f21f6a10fc708
+@idE = 692e31679a1f21f6a10fc8fc
+
+### get all menu items
+GET {{url}}/menu
+
+### get all events
+GET {{url}}/events
+
+### get menu item by id
+GET {{url}}/menu/{{idM}}
+
+### get event by id
+GET {{url}}/events/{{idE}}
+
+### add new menu item
+POST {{url}}/menu
+Content-Type: application/json
+
+{
+    "name": "1/4lb Classic Burger",
+    "description": "1.4lb of beef patty with lettuce, tomato, and special sauce",
+    "price": 12.99,
+    "url": "/img/burger.jpeg"
+}
+
+### add new event
+POST {{url}}/events
+Content-Type: application/json
+
+{
+    "name": "Parking Lot Sale",
+    "location": "Target Parking Lot",
+    "date": "2025-28-25",
+    "time": "11:00 AM"
+}
