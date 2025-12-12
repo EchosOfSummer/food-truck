@@ -240,6 +240,22 @@ header h1 {
     }
 }
 
+@keyframes neon-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow:
+            0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 15px #fff,
+            0 0 20px #00f2ff,
+            0 0 35px #00f2ff,
+            0 0 40px #00f2ff,
+            0 0 50px #00f2ff;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
 #menu, #events, #add, #details{
     margin: 20px;
     padding: 20px;
@@ -254,17 +270,33 @@ header h1 {
 #menu h2, #events h2, #add h2, #details h2{
     text-align: center;
     font-weight: Bold;
+    font-size: 2.5em;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #00f2ff,
+        0 0 35px #00f2ff,
+        0 0 40px #00f2ff,
+        0 0 50px #00f2ff,
+        1px 1px 0 #000,
+        2px 2px 0 #000,
+        3px 3px 0 #000;
+    animation: neon-flicker 1.5s infinite alternate;
+}
 
+#menu h2:hover, #events h2:hover, #add h2:hover, #details h2:hover {
+    transform: perspective(500px) rotateX(0deg) scale(1.1);
+    text-shadow: 
+        2px 2px 0 #000,
+        4px 4px 0 #000,
+        6px 6px 0 #000,
+        8px 8px 0 #000,
+        10px 10px 0 #000,
+        12px 12px 20px rgba(0, 0, 0, 0.7);
 }
 
 #menuItems{
-    /* display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-content: center;
-    gap: 40px 60px;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -273,9 +305,6 @@ header h1 {
 }
 .menuItems{
     text-align: center;
-    /* word-wrap: break-word;
-    overflow-wrap: break-word;
-    min-width: 0; */
 }
 .menuItems a {
     color: rgb(68, 255, 0);
@@ -296,49 +325,6 @@ header h1 {
         0 0 10px rgba(224, 160, 255, 0.4);
     transform: scale(1.5);
 }
-
-
-#eventItems{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px
-}
-
-.eventItems{
-    text-align: center;
-}
-
-#add {
-    text-align: center;
-}
-
-#menu h2, #events h2, #add h2, #details h2 {
-    font-size: 2.5em;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-shadow: 
-        1px 1px 0 #000,
-        2px 2px 0 #000,
-        3px 3px 0 #000,
-        4px 4px 0 #000,
-        5px 5px 0 #000,
-        6px 6px 10px rgba(0, 0, 0, 0.5);
-    transform: perspective(500px) rotateX(10deg);
-    transition: all 0.3s ease;
-}
-
-#menu h2:hover, #events h2:hover, #add h2:hover, #details h2:hover {
-    transform: perspective(500px) rotateX(0deg) scale(1.1);
-    text-shadow: 
-        2px 2px 0 #000,
-        4px 4px 0 #000,
-        6px 6px 0 #000,
-        8px 8px 0 #000,
-        10px 10px 0 #000,
-        12px 12px 20px rgba(0, 0, 0, 0.7);
-}
-/* Neon glow effect for menu items names */
 .menuItems h3 {
     text-shadow:
         0 0 5px #fff,
@@ -350,41 +336,7 @@ header h1 {
         0 0 50px #00f2ff;
     animation: neon-flicker 1.5s infinite alternate;
 }
-@keyframes neon-flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        text-shadow:
-            0 0 5px #fff,
-            0 0 10px #fff,
-            0 0 15px #fff,
-            0 0 20px #00f2ff,
-            0 0 35px #00f2ff,
-            0 0 40px #00f2ff,
-            0 0 50px #00f2ff;
-    }
-    20%, 24%, 55% {
-        text-shadow: none;
-    }
-}
 
-#menu h2, #events h2, #add h2, #details h2{
-    font-size: 2.5em;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-shadow: 
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 15px #fff,
-        0 0 20px #00f2ff,
-        0 0 35px #00f2ff,
-        0 0 40px #00f2ff,
-        0 0 50px #00f2ff,
-        1px 1px 0 #000,
-        2px 2px 0 #000,
-        3px 3px 0 #000;
-    animation: neon-flicker 1.5s infinite alternate;
-}
-
-/* style for menu descriptions and prices */
 .menuItems p {
     text-align: center;
     color: rgb(68, 255, 0);
@@ -398,7 +350,16 @@ header h1 {
     margin: 8px 0;
 }
 
-/* style for event links */
+#eventItems{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px
+}
+
+.eventItems{
+    text-align: center;
+}
 .eventItems a {
     text-align: center;
     color: rgb(123, 255, 0);
@@ -420,14 +381,23 @@ header h1 {
     transform: scale(1.5);
 }
 
-/* event detail page text */
+#add {
+    text-align: center;
+}
+
+#add a { 
+    color: #fff;
+    text-shadow: 
+        0 0 3px rgba(255, 255, 255, 0.5);
+}
+
 #details p { 
     text-align: center;
     color: #b0b0ff;
     font-size: 1.3em;
     text-shadow:
         0 0 3px rgba(176, 176, 255, 0.3);
-    margin: 15px 0;
+    margin: 20px auto;
 }
 #details h3 { 
     text-align: center;
@@ -449,14 +419,10 @@ header h1 {
         0 0 5px rgba(192, 128, 255, 0.3);
     margin: 15px 0;
 }
-
-/* add something button */
-#add a { 
-    color: #fff;
-    text-shadow: 
-        0 0 3px rgba(255, 255, 255, 0.5);
+#details img {
+    text-align:center;
+    margin: 0 auto;
 }
-
 
 .carouselBox {
     margin-top: 20px ;
