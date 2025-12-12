@@ -13,53 +13,7 @@
 }
 /* #000 0%, #1a1a1a 40%, #2d5a3d 70%, #4a7c59 100% */
 
-#menu, #events, #add, #details{
-    margin: 20px;
-    padding: 20px;
-    /* background-color: #666666; */
-    background: radial-gradient(ellipse at center, black 0%, black 20%, red 70%, black 80%, black 100%);
-    border: 2px solid black;
-    border-radius: 150px;
-    box-shadow: 0 2px 5px rgba(50, 50, 50, 0.1);
-}
 
-
-#menu h2, #events h2, #add h2, #details h2{
-    text-align: center;
-    font-weight: Bold;
-
-}
-
-#menuItems{
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-content: center;
-    gap: 40px 60px;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-}
-.menuItems{
-    text-align: center;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    min-width: 0;
-}
-
-#eventItems{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px
-}
-
-.eventItems{
-    text-align: center;
-}
-
-#add {
-    text-align: center;
-}
 body {
     font-family: Arial, sans-serif;
     /* margin: 0px;
@@ -286,6 +240,79 @@ header h1 {
     }
 }
 
+#menu, #events, #add, #details{
+    margin: 20px;
+    padding: 20px;
+    background-color: #666666;
+    background: radial-gradient(ellipse at center, black 0%, black 20%, red 70%, black 80%, black 100%);
+    border: 2px solid black;
+    border-radius: 150px;
+    box-shadow: 0 2px 5px rgba(50, 50, 50, 0.1);
+}
+
+
+#menu h2, #events h2, #add h2, #details h2{
+    text-align: center;
+    font-weight: Bold;
+
+}
+
+#menuItems{
+    /* display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: center;
+    gap: 40px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+}
+.menuItems{
+    text-align: center;
+    /* word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 0; */
+}
+.menuItems a {
+    color: rgb(68, 255, 0);
+    text-shadow:
+        0 0 3px rgba(192, 128, 255, 0.4),
+        0 0 5px rgba(192, 128, 255, 0.3);
+    font-size: 1.5em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 10px 0;
+}
+.menuItems a:hover {
+    text-align: center;
+    color: #b0b0ff;
+    text-shadow:
+        0 0 5px rgba(160, 255, 177, 0.6),
+        0 0 10px rgba(224, 160, 255, 0.4);
+    transform: scale(1.5);
+}
+
+
+#eventItems{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px
+}
+
+.eventItems{
+    text-align: center;
+}
+
+#add {
+    text-align: center;
+}
+
 #menu h2, #events h2, #add h2, #details h2 {
     font-size: 2.5em;
     font-weight: bold;
@@ -402,6 +429,27 @@ header h1 {
         0 0 3px rgba(176, 176, 255, 0.3);
     margin: 15px 0;
 }
+#details h3 { 
+    text-align: center;
+    color: rgb(123, 255, 0);
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow:
+        0 0 3px rgba(192, 128, 255, 0.4),
+        0 0 5px rgba(192, 128, 255, 0.3);
+    margin: 15px 0;
+}
+#details h4 { 
+    text-align: center;
+    color: rgb(68, 255, 0);
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow:
+        0 0 3px rgba(192, 128, 255, 0.4),
+        0 0 5px rgba(192, 128, 255, 0.3);
+    margin: 15px 0;
+}
+
 /* add something button */
 #add a { 
     color: #fff;
