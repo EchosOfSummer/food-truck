@@ -378,17 +378,19 @@ header h1 {
     text-shadow:
         0 0 3px rgba(192, 128, 255, 0.4),
         0 0 5px rgba(192, 128, 255, 0.3);
-    font-size: 1.2em;
+    font-size: 1.5em;
     text-decoration: none;
     transition: all 0.3s ease;
+    display: block;
+    margin: 10px 0;
 }
 .eventItems a:hover {
     text-align: center;
     color: #b0b0ff;
-    font-size: 1.3em;
     text-shadow:
         0 0 5px rgba(160, 255, 177, 0.6),
         0 0 10px rgba(224, 160, 255, 0.4);
+    transform: scale(1.5);
 }
 
 /* event detail page text */
@@ -407,27 +409,6 @@ header h1 {
         0 0 3px rgba(255, 255, 255, 0.5);
 }
 
-/* style for event links */
-.eventItems a {
-    text-align: center;
-    color: #c080ff;
-    text-shadow:
-        0 0 3px rgba(192, 128, 255, 0.4),
-        0 0 5px rgba(192, 128, 155, 0.3);
-    font-size: 1.5em;
-    text-decoration: underline;
-    transition: all 0.3s ease;
-    display: block;
-    margin: 10px 0;
-}
-
-.eventItems a:hover {
-    color: #e0a0ff;
-    text-shadow:
-        0 0 5px rgba(224, 160, 255, 0.6),
-        0 0 10px rgba(224, 160, 255, 0.4);
-    transform: scale(2.05);
-}
 
 .carouselBox {
     margin-top: 20px ;

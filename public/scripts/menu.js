@@ -7,7 +7,7 @@
         return
     }
 
-    const res = await fetch(`/api/v1/events/${menuId}`)
+    const res = await fetch(`/api/v1/menu/${menuId}`)
     const menuData = await res.json()
 
     if (menuData.error) {
@@ -15,6 +15,10 @@
     }
 
     document.querySelector('#menuName').textContent = menuData.name
-    document.querySelector('#menuDescription').textContent = `Date: ${menuData.date}`
-    document.querySelector('#menuPrice').textContent = `Time: ${menuData.time}`
+    document.querySelector('#menuDescription').textContent = menuData.description
+    document.querySelector('#menuPrice').textContent = `Price: $${menuData.price}`
+    const img = document.querySelector('#menuImage')
+    img.src = menuData.url
+    img.alt = menuData.name
+    img.style.display = 'block'
 })()
