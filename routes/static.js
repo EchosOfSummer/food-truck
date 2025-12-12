@@ -19,7 +19,7 @@ router.get('/event/:id', (req, res) => {
 
 // Menu item details page
 router.get('/menu/:id', (req, res) => {
-    res.sendFile('index.html', {root})
+    res.sendFile('menu.html', {root})
 })
 
 // Admin page
