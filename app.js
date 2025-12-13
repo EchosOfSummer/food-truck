@@ -3,8 +3,6 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-
-
 // allow us to send json
 app.use(express.json())
 // allow us to respond with static webpages

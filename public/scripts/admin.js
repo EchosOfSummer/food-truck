@@ -30,7 +30,7 @@
             console.log('Menu item added: ', json)
 
             if (menuAdded) {
-                menuAdded.textContent = `Menu item "${json.name}" added!`
+                menuAdded.textContent = `Menu item "${newMenuItem.name}" added!`
             }
 
             addItem.reset()

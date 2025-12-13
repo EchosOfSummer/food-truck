@@ -15,12 +15,15 @@
 
     if (eventData.error) {
         document.querySelector('#event').innerHTML = `<p>${eventData.error.message}</p>`
+        return
+    }else {
+        document.querySelector('#eventName').textContent = eventData.name
+        document.querySelector('#eventLocation').textContent = `Location: ${eventData.location}`
+        document.querySelector('#eventDate').textContent = `Date: ${eventData.date}`
+        document.querySelector('#eventTime').textContent = `Time: ${eventData.time}`
     }
 
-    document.querySelector('#eventName').textContent = eventData.name
-    document.querySelector('#eventLocation').textContent = `Location: ${eventData.location}`
-    document.querySelector('#eventDate').textContent = `Date: ${eventData.date}`
-    document.querySelector('#eventTime').textContent = `Time: ${eventData.time}`
+    
 
     // rabbit hole
     const randomImgs = [

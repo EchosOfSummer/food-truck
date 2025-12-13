@@ -10,49 +10,63 @@
     
     if (!menuBox || !eventBox) return
 
-    // fetch data from API
-    const [menuRes, eventRes] = await Promise.all([
-        fetch('/api/v1/menu'),
-        fetch('/api/v1/events')
-    ])
+    try {
+        // fetch data from API
+        const [menuRes, eventRes] = await Promise.all([
+            fetch('/api/v1/menu'),
+            fetch('/api/v1/events')
+        ])
 
-    const menuData = await menuRes.json()
-    const eventData = await eventRes.json()
+        const menuData = await menuRes.json()
+        const eventData = await eventRes.json()
 
-    // render menu
-    menuBox.innerHTML = ''
-    menuData.forEach((item) => {
-        const wrapper = document.createElement('article')
-        wrapper.className = 'menuItems'
+        // render menu
+        menuBox.innerHTML = ''
+        if (Array.isArray(menuData)) {
+            menuData.forEach((item) => {
+                const wrapper = document.createElement('article')
+                wrapper.className = 'menuItems'
 
-        const title = document.createElement('h3')
-        title.textContent = item.name
+                const title = document.createElement('h3')
+                title.textContent = item.name
 
-        const desc = document.createElement('p')
-        desc.textContent = item.description
+                const desc = document.createElement('p')
+                desc.textContent = item.description
 
-        const price = document.createElement('p')
-        price.textContent = `Price: $${item.price}`
+                const price = document.createElement('p')
+                price.textContent = `Price: $${item.price}`
 
-        const img = document.createElement('img')
-        img.src = item.url
-        img.alt = item.name
-        img.width = 300
+                const img = document.createElement('img')
+                img.src = item.url
+                img.alt = item.name
+                img.width = 300
 
-        wrapper.append(title, desc, price, img)
-        menuBox.appendChild(wrapper)
-    })
+                wrapper.append(title, desc, price, img)
+                menuBox.appendChild(wrapper)
+            })
+        }else {
+            menuBox.innerHTML = '<p>Could not load menu items.</p>'
+        }
 
-    // render events (name + date) w/ link to /event/:id
-    eventBox.innerHTML = ''
-    eventData.forEach((item) => {
-        const wrapper = document.createElement('article')
-        wrapper.className = 'eventItems'
+        // render events (name + date) w/ link to /event/:id
+        eventBox.innerHTML = ''
+        if (Array.isArray(eventData)) {
+            eventData.forEach((item) => {
+                const wrapper = document.createElement('article')
+                wrapper.className = 'eventItems'
 
-        const link = document.createElement('a')
-        link.href = `/event/${item._id}`
-        link.textContent = `${item.name} - ${item.date}`
-        wrapper.appendChild(link)
-        eventBox.appendChild(wrapper)
-    })
+                const link = document.createElement('a')
+                link.href = `/event/${item._id}`
+                link.textContent = `${item.name} - ${item.date}`
+                wrapper.appendChild(link)
+                eventBox.appendChild(wrapper)
+            })
+        }else {
+            eventBox.innerHTML = '<p>Could not load events.</p>'
+        }
+    }catch (err) {
+        console.error('Failed to load data:', err)
+        menuBox.innerHTML = '<p>Error loading menu</p>'
+        eventBox.innerHTML = '<p>Error loading events</p>'
+    }
 })()
