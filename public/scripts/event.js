@@ -4,123 +4,129 @@
 
     const path = window.location.pathname.split('/')
     const eventId = path[path.length - 1]
+    const eventBox = document.querySelector('#event')
 
     if (!eventId) {
-        document.querySelector('#event').innerHTML = '<p>No event selected.</p>'
+        eventBox.innerHTML = '<p>No event selected.</p>'
         return
     }
 
-    const res = await fetch(`/api/v1/events/${eventId}`)
-    const eventData = await res.json()
+    try {
+        const res = await fetch(`/api/v1/events/${eventId}`)
+        const eventData = await res.json()
 
-    if (eventData.error) {
-        document.querySelector('#event').innerHTML = `<p>${eventData.error.message}</p>`
-        return
-    }else {
-        document.querySelector('#eventName').textContent = eventData.name
-        document.querySelector('#eventLocation').textContent = `Location: ${eventData.location}`
-        document.querySelector('#eventDate').textContent = `Date: ${eventData.date}`
-        document.querySelector('#eventTime').textContent = `Time: ${eventData.time}`
-    }
+        if (eventData.error) {
+            eventBox.innerHTML = `<p>${eventData.error.message}</p>`
+            return
+        }else {
+            document.querySelector('#eventName').textContent = eventData.name
+            document.querySelector('#eventLocation').textContent = `Location: ${eventData.location}`
+            document.querySelector('#eventDate').textContent = `Date: ${eventData.date}`
+            document.querySelector('#eventTime').textContent = `Time: ${eventData.time}`
+        }
+        
+        // rabbit hole
+        const randomImgs = [
+            '/img/random01.jpeg',
+            '/img/random02.jpeg',
+            '/img/random03.jpeg',
+            '/img/random04.jpeg',
+            '/img/random05.jpeg',
+            '/img/random06.jpeg',
+            '/img/random07.jpeg',
+            '/img/random08.jpeg',
+            '/img/random09.jpeg',
+            '/img/random10.jpeg',
+        ]
 
-    
-
-    // rabbit hole
-    const randomImgs = [
-        '/img/random01.jpeg',
-        '/img/random02.jpeg',
-        '/img/random03.jpeg',
-        '/img/random04.jpeg',
-        '/img/random05.jpeg',
-        '/img/random06.jpeg',
-        '/img/random07.jpeg',
-        '/img/random08.jpeg',
-        '/img/random09.jpeg',
-        '/img/random10.jpeg',
-    ]
-
-    const detailsBox = document.querySelector('#details')
+        const detailsBox = document.querySelector('#details')
 
 
-    // create carousel box
-    const carouselBox = document.createElement('div')
-    carouselBox.className = 'carouselBox'
+        // create carousel box
+        const carouselBox = document.createElement('div')
+        carouselBox.className = 'carouselBox'
 
-    const carousel = document.createElement('div')
-    carousel.className = 'carousel'
-    // carousel.id = `carousel-${index}`
+        const carousel = document.createElement('div')
+        carousel.className = 'carousel'
+        // carousel.id = `carousel-${index}`
 
-    for (let i = 0; i<3; i++) {
-        const img = document.createElement('img')
-        img.alt = `Event image ${i + 1}`
-        carousel.appendChild(img)
-    }
+        for (let i = 0; i<3; i++) {
+            const img = document.createElement('img')
+            img.alt = `Event image ${i + 1}`
+            carousel.appendChild(img)
+        }
 
-    // create buttons
-    const btnDiv = document.createElement('div')
-    btnDiv.className = 'carouselBtns'
+        // create buttons
+        const btnDiv = document.createElement('div')
+        btnDiv.className = 'carouselBtns'
 
-    const prevBtn = document.createElement('button')
-    prevBtn.textContent = 'Prev'
-    prevBtn.className = 'carouselBtn'
+        const prevBtn = document.createElement('button')
+        prevBtn.textContent = 'Prev'
+        prevBtn.className = 'carouselBtn'
 
-    const nextBtn = document.createElement('button')
-    nextBtn.textContent = 'Next'
-    nextBtn.className = 'carouselBtn'
+        const nextBtn = document.createElement('button')
+        nextBtn.textContent = 'Next'
+        nextBtn.className = 'carouselBtn'
 
-    btnDiv.appendChild(prevBtn)
-    btnDiv.appendChild(nextBtn)
+        btnDiv.appendChild(prevBtn)
+        btnDiv.appendChild(nextBtn)
 
-    carouselBox.appendChild(carousel)
-    carouselBox.appendChild(btnDiv)
+        carouselBox.appendChild(carousel)
+        carouselBox.appendChild(btnDiv)
 
-    detailsBox.appendChild(carouselBox)
+        detailsBox.appendChild(carouselBox)
 
-    // carousel functionality
-    const images = carousel.querySelectorAll('img')
-    let currentImg = Math.floor(Math.random() * randomImgs.length)
-    let autoRotate
+        // carousel functionality
+        const images = carousel.querySelectorAll('img')
+        let currentImg = Math.floor(Math.random() * randomImgs.length)
+        let autoRotate
 
-    function updateCarousel() {
-        images.forEach((img, index) => {
-            img.classList.remove('prev', 'active', 'next')
-            
-            const imgIndex = ((index + currentImg) % randomImgs.length + randomImgs.length) % randomImgs.length
-            img.src = randomImgs[imgIndex]
+        function updateCarousel() {
+            images.forEach((img, index) => {
+                img.classList.remove('prev', 'active', 'next')
+                
+                const imgIndex = ((index + currentImg) % randomImgs.length + randomImgs.length) % randomImgs.length
+                img.src = randomImgs[imgIndex]
 
-            if (index === 0) img.classList.add('prev')
-            if (index === 1) img.classList.add('active')
-            if ( index === 2) img.classList.add('next')
-            
+                if (index === 0) img.classList.add('prev')
+                if (index === 1) img.classList.add('active')
+                if ( index === 2) img.classList.add('next')
+                
+            })
+        }
+
+        function rotate() {
+            currentImg++
+            updateCarousel()
+        }
+        function startAuto() {
+            autoRotate = setInterval(rotate, 3000)
+        }
+        function stopAuto() {
+            clearInterval(autoRotate)
+        }
+
+        updateCarousel()
+        startAuto()
+
+        prevBtn.addEventListener('click', () => {
+            stopAuto()
+            currentImg--
+            updateCarousel()
+            startAuto()
         })
+        nextBtn.addEventListener('click', () => {
+            stopAuto()
+            currentImg++
+            updateCarousel()
+            startAuto()
+        })
+    }catch (err) {
+        console.error('Failed to load content:', err)
+        eventBox.innerHTML = '<p>Error loading event details.</p>'
     }
+})()
 
-    function rotate() {
-        currentImg++
-        updateCarousel()
-    }
-    function startAuto() {
-        autoRotate = setInterval(rotate, 3000)
-    }
-    function stopAuto() {
-        clearInterval(autoRotate)
-    }
-
-    updateCarousel()
-    startAuto()
-
-    prevBtn.addEventListener('click', () => {
-        stopAuto()
-        currentImg--
-        updateCarousel()
-        startAuto()
-    })
-    nextBtn.addEventListener('click', () => {
-        stopAuto()
-        currentImg++
-        updateCarousel()
-        startAuto()
-    })
 
     // const { pathname } = window.location
     // const parts = pathname.split('/')
@@ -140,5 +146,3 @@
     // if (locationEl) locationEl.textContent = `Location: ${location || ''}` 
     // if (dateEl) dateEl.textContent = `Date: ${date || ''}`
     // if (timeEl) timeEl.textContent = `Time: ${time || ''}`
-})()
-

@@ -20,20 +20,27 @@
                 url: document.getElementById('menuUrl').value
             }
 
-            const res = await fetch('/api/v1/menu',{
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newMenuItem)
-            })
+            try {
+                const res = await fetch('/api/v1/menu',{
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newMenuItem)
+                })
 
-            const json = await res.json()
-            console.log('Menu item added: ', json)
+                const json = await res.json()
+                console.log('Menu item added: ', json)
 
-            if (menuAdded) {
-                menuAdded.textContent = `Menu item "${newMenuItem.name}" added!`
+                if (menuAdded) {
+                    menuAdded.textContent = `Menu item "${newMenuItem.name}" added!`
+                }
+
+                addItem.reset()
+            }catch (err) {
+                console.error('Failed to add menu item:', err)
+                if (menuAdded) {
+                    menuAdded.textContent = 'Error adding menu item.'
+                }
             }
-
-            addItem.reset()
         })
     }
 
@@ -49,16 +56,20 @@
                 time: document.getElementById('eventTime').value
             }
 
-            const res = await fetch('/api/v1/events',{
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newEvent)
-            })
+            try {
+                const res = await fetch('/api/v1/events',{
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newEvent)
+                })
 
-            const json = await res.json()
-            console.log('Event created: ', json)
+                const json = await res.json()
+                console.log('Event created: ', json)
 
-            addEvent.reset()
+                addEvent.reset()
+            }catch (err) {
+                console.error('Failed to create event:', err)
+            }
         })
     }
 })()
