@@ -2,151 +2,126 @@
     const eventBox = document.querySelector('#eventItems');
 
     if (!eventBox) return;
+        
+    try {
+        const eventRes = await fetch('/api/v1/events');
+        const eventData = await eventRes.json();
 
-    const eventRes = await fetch('/api/v1/events');
-    const eventData = await eventRes.json();
+        // rabbit hole
+        const randomImgs = [
+            '/img/random01.jpeg',
+            '/img/random02.jpeg',
+            '/img/random03.jpeg',
+            '/img/random04.jpeg',
+            '/img/random05.jpeg',
+            '/img/random06.jpeg',
+            '/img/random07.jpeg',
+            '/img/random08.jpeg',
+            '/img/random09.jpeg',
+            '/img/random10.jpeg',
+        ]
 
-    // // render events
-    // eventBox.innerHTML = '';
-    // eventData.forEach((item) => {
-    //     const wrapper = document.createElement('article')
-    //     wrapper.className = 'eventItems'
+        // render events
+        eventBox.innerHTML = ''
+        
+        if (Array.isArray(eventData)) {
+            eventData.forEach((item, index) => {
+                const wrapper = document.createElement('article')
+                wrapper.className = 'eventItems'
 
-    //     const link = document.createElement('a')
-    //     link.href = `/event/${item._id}`
-    //     link.textContent = `${item.name} - ${item.date}`
-    //     wrapper.appendChild(link)
-    //     eventBox.appendChild(wrapper)
-    // })
+                const link = document.createElement('a')
+                link.href = `/event/${item._id}`
+                link.textContent = `${item.name} - ${item.date}`
 
-    // rabbit hole
-    const randomImgs = [
-        '/img/random01.jpeg',
-        '/img/random02.jpeg',
-        '/img/random03.jpeg',
-        '/img/random04.jpeg',
-        '/img/random05.jpeg',
-        '/img/random06.jpeg',
-        '/img/random07.jpeg',
-        '/img/random08.jpeg',
-        '/img/random09.jpeg',
-        '/img/random10.jpeg',
-    ]
+                // create carousel box
+                const carouselBox = document.createElement('div')
+                carouselBox.className = 'carouselBox'
 
-    // // shuffle array
-    // function shuffle(array) {
-    //     const newArray = [...array]
-    //     for (let i = newArray.length - 1; i > 0; i--) {
-    //         const j = Math.floor(Math.random() * (i + 1));
-    //         [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-    //     }
-    //     return newArray
-    // }
+                const carousel = document.createElement('div')
+                carousel.className = 'carousel'
+                carousel.id = `carousel-${index}`
 
-    // render events
-    eventBox.innerHTML = ''
-    eventData.forEach((item, index) => {
-        const wrapper = document.createElement('article')
-        wrapper.className = 'eventItems'
+                // create images elements
+                for (let i = 0; i<3; i++) {
+                    const img = document.createElement('img')
+                    
+                    img.alt = `Event image ${i + 1}`
+                    carousel.appendChild(img)
+                }
 
-        const link = document.createElement('a')
-        link.href = `/event/${item._id}`
-        link.textContent = `${item.name} - ${item.date}`
+                // create buttons
+                const btnDiv = document.createElement('div')
+                btnDiv.className = 'carouselBtns'
 
-        // create carousel box
-        const carouselBox = document.createElement('div')
-        carouselBox.className = 'carouselBox'
+                const prevBtn = document.createElement('button')
+                prevBtn.textContent = 'Prev'
+                prevBtn.className = 'carouselBtn'
 
-        const carousel = document.createElement('div')
-        carousel.className = 'carousel'
-        carousel.id = `carousel-${index}`
+                const nextBtn = document.createElement('button')
+                nextBtn.textContent = 'Next'
+                nextBtn.className = 'carouselBtn'
 
-        // const shuffledImgs = shuffle(randomImgs)
-        // const selectedImgs = shuffledImgs.slice(0, 3)
+                btnDiv.appendChild(prevBtn)
+                btnDiv.appendChild(nextBtn)
 
-        // selectedImgs.forEach((imgSrc, index) => {
-        //     const img = document.createElement('img')
-        //     img.src = imgSrc
-        //     img.alt = `${item.name} image ${index + 1}`
-        //     if (index === 0) img.classList.add('prev')
-        //     if (index === 1) img.classList.add('active')
-        //     if (index === 2) img.classList.add('next')
-        //     carousel.appendChild(img)
-        // })
-        // create images elements
-        for (let i = 0; i<3; i++) {
-            const img = document.createElement('img')
-            
-            img.alt = `Event image ${i + 1}`
-            carousel.appendChild(img)
-        }
+                carouselBox.appendChild(carousel)
+                carouselBox.appendChild(btnDiv)
 
-        // create buttons
-        const btnDiv = document.createElement('div')
-        btnDiv.className = 'carouselBtns'
+                wrapper.appendChild(link)
+                wrapper.appendChild(carouselBox)
+                eventBox.appendChild(wrapper)
 
-        const prevBtn = document.createElement('button')
-        prevBtn.textContent = 'Prev'
-        prevBtn.className = 'carouselBtn'
+                // carousel functionality
+                const images = carousel.querySelectorAll('img')
+                let currentImg = Math.floor(Math.random() * randomImgs.length)
+                let autoRotate
 
-        const nextBtn = document.createElement('button')
-        nextBtn.textContent = 'Next'
-        nextBtn.className = 'carouselBtn'
+                function updateCarousel() {
+                    images.forEach((img, index) => {
+                        img.classList.remove('prev', 'active', 'next')
+                        
+                        const imgIndex = ((index + currentImg) % randomImgs.length + randomImgs.length) % randomImgs.length
+                        img.src = randomImgs[imgIndex]
 
-        btnDiv.appendChild(prevBtn)
-        btnDiv.appendChild(nextBtn)
+                        if (index === 0) img.classList.add('prev')
+                        if (index === 1) img.classList.add('active')
+                        if ( index === 2) img.classList.add('next')
+                        
+                    })
+                }
 
-        carouselBox.appendChild(carousel)
-        carouselBox.appendChild(btnDiv)
+                function rotate() {
+                    currentImg++
+                    updateCarousel()
+                }
+                function startAuto() {
+                    autoRotate = setInterval(rotate, 3000)
+                }
+                function stopAuto() {
+                    clearInterval(autoRotate)
+                }
 
-        wrapper.appendChild(link)
-        wrapper.appendChild(carouselBox)
-        eventBox.appendChild(wrapper)
+                updateCarousel()
+                startAuto()
 
-        // carousel functionality
-        const images = carousel.querySelectorAll('img')
-        let currentImg = Math.floor(Math.random() * randomImgs.length)
-        let autoRotate
-
-        function updateCarousel() {
-            images.forEach((img, index) => {
-                img.classList.remove('prev', 'active', 'next')
-                
-                const imgIndex = ((index + currentImg) % randomImgs.length + randomImgs.length) % randomImgs.length
-                img.src = randomImgs[imgIndex]
-
-                if (index === 0) img.classList.add('prev')
-                if (index === 1) img.classList.add('active')
-                if ( index === 2) img.classList.add('next')
-                
+                prevBtn.addEventListener('click', () => {
+                    stopAuto()
+                    currentImg--
+                    updateCarousel()
+                    startAuto()
+                })
+                nextBtn.addEventListener('click', () => {
+                    stopAuto()
+                    currentImg++
+                    updateCarousel()
+                    startAuto()
+                })
             })
+        }else {
+            eventBox.innerHTML = '<p>Could not load events.</p>'
         }
-
-        function rotate() {
-            currentImg++
-            updateCarousel()
-        }
-        function startAuto() {
-            autoRotate = setInterval(rotate, 3000)
-        }
-        function stopAuto() {
-            clearInterval(autoRotate)
-        }
-
-        updateCarousel()
-        startAuto()
-
-        prevBtn.addEventListener('click', () => {
-            stopAuto()
-            currentImg--
-            updateCarousel()
-            startAuto()
-        })
-        nextBtn.addEventListener('click', () => {
-            stopAuto()
-            currentImg++
-            updateCarousel()
-            startAuto()
-        })
-    })
+    } catch (err) {
+        console.error('Failed to load events:', err)
+        eventBox.innerHTML = '<p>Error loading events.</p>'
+    }
 })();

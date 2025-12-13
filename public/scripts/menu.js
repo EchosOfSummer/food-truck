@@ -12,6 +12,7 @@
 
     if (menuData.error) {
         document.querySelector('#menuItem').innerHTML = `<p>${menuData.error.message}</p>`
+        return
     }
 
     document.querySelector('#menuName').textContent = menuData.name

@@ -12,6 +12,14 @@ router.get('/', (req, res) => {
     res.sendFile('index.html', {root})
 })
 
+router.get('/events', (req, res) => {
+    res.sendFile('events.html', {root})
+})
+
+router.get('/menus', (req, res) => {
+    res.sendFile('menus.html', {root})
+})
+
 // Event details page
 router.get('/event/:id', (req, res) => {
     res.sendFile('event.html', {root})
