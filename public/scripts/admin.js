@@ -7,6 +7,7 @@
     const addItem = document.getElementById('addItem')
     const addEvent = document.getElementById('addEvent')
     const menuAdded = document.getElementById('menuAdded')
+    const eventAdded = document.getElementById('eventAdded')
 
     // handle add menu item form
     if (addItem) {
@@ -32,6 +33,9 @@
 
                 if (menuAdded) {
                     menuAdded.textContent = `Menu item "${newMenuItem.name}" added!`
+                    setTimeout(() => {
+                        menuAdded.textContent = ''
+                    },3000)
                 }
 
                 addItem.reset()
@@ -65,6 +69,13 @@
 
                 const json = await res.json()
                 console.log('Event created: ', json)
+
+                if (menuAdded) {
+                    eventAdded.textContent = `Event "${newEvent.name}" added!`
+                    setTimeout(() => {
+                        eventAdded.textContent = ''
+                    },3000)
+                }
 
                 addEvent.reset()
             }catch (err) {
