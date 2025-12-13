@@ -26,97 +26,99 @@
         
         if (Array.isArray(eventData)) {
             eventData.forEach((item, index) => {
-                const wrapper = document.createElement('article')
-                wrapper.className = 'eventItems'
+            const wrapper = document.createElement('article')
+            wrapper.className = 'eventItems'
 
-                const link = document.createElement('a')
-                link.href = `/event/${item._id}`
-                link.textContent = `${item.name} - ${item.date}`
+            const link = document.createElement('a')
+            link.href = `/event/${item._id}`
+            link.textContent = `${item.name} - ${item.date}`
 
-                // create carousel box
-                const carouselBox = document.createElement('div')
-                carouselBox.className = 'carouselBox'
+            // create carousel box
+            const carouselBox = document.createElement('div')
+            carouselBox.className = 'carouselBox'
 
-                const carousel = document.createElement('div')
-                carousel.className = 'carousel'
-                carousel.id = `carousel-${index}`
+            const carousel = document.createElement('div')
+            carousel.className = 'carousel'
+            carousel.id = `carousel-${index}`
 
-                // create images elements
-                for (let i = 0; i<3; i++) {
-                    const img = document.createElement('img')
+            // create images elements
+            for (let i = 0; i<3; i++) {
+                const img = document.createElement('img')
+                
+                img.alt = `Event image ${i + 1}`
+                carousel.appendChild(img)
+            }
+
+            // create buttons
+            const btnDiv = document.createElement('div')
+            btnDiv.className = 'carouselBtns'
+
+            const prevBtn = document.createElement('button')
+            prevBtn.textContent = 'Prev'
+            prevBtn.className = 'carouselBtn'
+
+            const nextBtn = document.createElement('button')
+            nextBtn.textContent = 'Next'
+            nextBtn.className = 'carouselBtn'
+
+            btnDiv.appendChild(prevBtn)
+            btnDiv.appendChild(nextBtn)
+
+            carouselBox.appendChild(carousel)
+            carouselBox.appendChild(btnDiv)
+
+            wrapper.appendChild(link)
+            wrapper.appendChild(carouselBox)
+            eventBox.appendChild(wrapper)
+
+            // carousel functionality
+            const images = carousel.querySelectorAll('img')
+            let currentImg = Math.floor(Math.random() * randomImgs.length)
+            let autoRotate
+
+            function updateCarousel() {
+                images.forEach((img, index) => {
+                    img.classList.remove('prev', 'active', 'next')
                     
-                    img.alt = `Event image ${i + 1}`
-                    carousel.appendChild(img)
-                }
+                    const imgIndex = ((index + currentImg) % randomImgs.length + randomImgs.length) % randomImgs.length
+                    img.src = randomImgs[imgIndex]
 
-                // create buttons
-                const btnDiv = document.createElement('div')
-                btnDiv.className = 'carouselBtns'
+                    if (index === 0) img.classList.add('prev')
+                    if (index === 1) img.classList.add('active')
+                    if ( index === 2) img.classList.add('next')
+                    
+                })
+            }
 
-                const prevBtn = document.createElement('button')
-                prevBtn.textContent = 'Prev'
-                prevBtn.className = 'carouselBtn'
+            function rotate() {
+                currentImg++
+                updateCarousel()
+            }
+            function startAuto() {
+                if (autoRotate) clearInterval(autoRotate)
+                autoRotate = setInterval(rotate, 3000)
+            }
+            function stopAuto() {
+                if (autoRotate) clearInterval(autoRotate)
+            }
 
-                const nextBtn = document.createElement('button')
-                nextBtn.textContent = 'Next'
-                nextBtn.className = 'carouselBtn'
+            updateCarousel()
+            startAuto()
 
-                btnDiv.appendChild(prevBtn)
-                btnDiv.appendChild(nextBtn)
-
-                carouselBox.appendChild(carousel)
-                carouselBox.appendChild(btnDiv)
-
-                wrapper.appendChild(link)
-                wrapper.appendChild(carouselBox)
-                eventBox.appendChild(wrapper)
-
-                // carousel functionality
-                const images = carousel.querySelectorAll('img')
-                let currentImg = Math.floor(Math.random() * randomImgs.length)
-                let autoRotate
-
-                function updateCarousel() {
-                    images.forEach((img, index) => {
-                        img.classList.remove('prev', 'active', 'next')
-                        
-                        const imgIndex = ((index + currentImg) % randomImgs.length + randomImgs.length) % randomImgs.length
-                        img.src = randomImgs[imgIndex]
-
-                        if (index === 0) img.classList.add('prev')
-                        if (index === 1) img.classList.add('active')
-                        if ( index === 2) img.classList.add('next')
-                        
-                    })
-                }
-
-                function rotate() {
-                    currentImg++
-                    updateCarousel()
-                }
-                function startAuto() {
-                    autoRotate = setInterval(rotate, 3000)
-                }
-                function stopAuto() {
-                    clearInterval(autoRotate)
-                }
-
+            prevBtn.addEventListener('click', () => {
+                stopAuto()
+                currentImg--
                 updateCarousel()
                 startAuto()
-
-                prevBtn.addEventListener('click', () => {
-                    stopAuto()
-                    currentImg--
-                    updateCarousel()
-                    startAuto()
-                })
-                nextBtn.addEventListener('click', () => {
-                    stopAuto()
-                    currentImg++
-                    updateCarousel()
-                    startAuto()
-                })
             })
+            nextBtn.addEventListener('click', () => {
+                stopAuto()
+                currentImg++
+                updateCarousel()
+                startAuto()
+            })
+            window.addEventListener('beforeunload', () => stopAuto())
+        })
         }else {
             eventBox.innerHTML = '<p>Could not load events.</p>'
         }

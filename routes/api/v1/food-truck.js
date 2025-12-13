@@ -45,6 +45,9 @@ router.get('/events', async (req, res) => {
 router.get('/menu/:id', async (req, res) => {
     try {
         const { id } = req.params
+        if (!ObjectId.isValid(id)) {
+            return res.status(400).send({ error: { message: 'Invalid ID format' }})
+        }
         const collection = await getMenu()
         const found = await collection.findOne({ "_id": new ObjectId(id) })
         if (found) res.send(found)
@@ -59,6 +62,9 @@ router.get('/menu/:id', async (req, res) => {
 router.get('/events/:id', async (req, res) => {
     try {
         const { id } = req.params
+        if (!ObjectId.isValid(id)) {
+            return res.status(400).send({ error: { message: 'Invalid ID format' }})
+        }
         const collection = await getEvent()
         const found = await collection.findOne({ "_id": new ObjectId(id) })
         if (found) res.send(found)
